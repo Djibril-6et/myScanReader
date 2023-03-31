@@ -1,12 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import Pdf from 'react-native-pdf';
-import { StyleSheet } from 'react-native';
+import React from "react";
+import styled from "styled-components";
+import Pdf from "react-native-pdf";
 
 const Index = () => {
-
   const source = {
-    uri: 'http://localhost:7001/pdf-files/Camara_Ayoub_compte_rendu_entretien_B3_Projet_pro_2122.pdf',
+    uri: "http://localhost:7001/scan/Naruto/chap/1.pdf",
     cache: true,
   };
 
@@ -15,38 +13,28 @@ const Index = () => {
       <Background>
         <Title>My Scans Reader</Title>
       </Background>
-      <Pdf
+      {/* <Test
         source={source}
-        // onLoadComplete={(numberOfPages, filePath) => {
-        //   console.log(`Number of pages: ${numberOfPages}`);
-        // }}
-        // onPageChanged={(page, numberOfPages) => {
-        //   console.log(`Current page: ${page}`);
-        // }}
-        onError={error => {
+        onError={(error) => {
           console.log(error);
         }}
-        onPressLink={uri => {
+        onPressLink={(uri) => {
           console.log(`Link pressed: ${uri}`);
         }}
-        style={styles.pdf}
-      />
+      /> */}
     </>
   );
 };
 
-const styles = StyleSheet.create({
-  
-  pdf: {
-      width: '100%',
-      height: '100%',
-  }
-});
+const Test = styled(Pdf)`
+  width: 100%;
+  height: 100%;
+`;
 
 const Background = styled.View`
   width: 100%;
-  height: 15%;
-  background-color: #000;
+  height: 10%;
+  background-color: #696969;
   /* position: absolute;
   bottom: 0; */
 `;
@@ -55,8 +43,7 @@ const Title = styled.Text`
   color: #fff;
   text-align: center;
   height: 40%;
-  margin-top: auto;
-  margin-bottom: 0;
+  margin: auto;
   font-size: 30px;
 `;
 
