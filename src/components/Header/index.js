@@ -34,7 +34,7 @@ const Test = styled(Pdf)`
 const Background = styled.View`
   width: 100%;
   height: 10%;
-  background-color: #696969;
+  background-color: ${props => props.theme.primaryGrey};
   /* position: absolute;
   bottom: 0; */
 `;
