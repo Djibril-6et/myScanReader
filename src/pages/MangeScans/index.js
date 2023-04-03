@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { Text } from "react-native";
 import styled from "styled-components";
 import Header from "../../components/Header";
 import serverService from "../../services/server.service";
 const path = require("path");
 import Pdf from "react-native-pdf";
+import {useDispatch, useSelector} from 'react-redux';
+import { addToFavorites, deleteFromFavorites } from "../../redux/actions/favorites"
+import { Alert } from "react-native";
 
 const Index = (props) => {
-  const [manga, setManga] = useState("");
+  const [mangaName, setMangaName] = useState("");
   const [chapters, setChapters] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedChapter, setSelectedChapter] = useState();
   const [horizontalView, setHorizontalView] = useState(false);
 
+  const favList = useSelector(state => state.favorites.favoritesList);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    setManga(props.route.params.mangaName);
+    setMangaName(props.route.params.mangaName);
     serverService
       .getChapters(props.route.params.mangaName)
       .then((response) => {
@@ -30,6 +35,35 @@ const Index = (props) => {
   const getFilename = (fileName) => {
     const filename = path.basename(fileName, ".pdf");
     return filename;
+  };
+
+  const delete_from_favorites = id => {
+    // Alert.alert('Delete', 'Are you sure you want to delete this todo?', [
+    //   {
+    //     text: 'Cancel',
+    //     style: 'cancel',
+    //   },
+    //   {
+    //     text: 'OK',
+    //     onPress: () => {
+    //       dispatch(deleteTodo(id));
+    //     },
+    //   },
+    // ]);
+
+    dispatch(deleteFromFavorites(id));
+  };
+
+  const add_to_favorites = () => {
+
+    const isAlreadyInList = favList.find(element => element.manga === mangaName)
+    
+    if (isAlreadyInList) {
+      Alert.alert(mangaName, ' is already in your favorites', [{text: 'Close'}, {text : "Remove", onPress: () => delete_from_favorites(mangaName)}])
+    }
+    else {
+      dispatch(addToFavorites(mangaName))
+    }
   };
 
   return (
@@ -66,11 +100,16 @@ const Index = (props) => {
       </PdfModal>
 
       <Banner
-        source={{ uri: `http://localhost:7001/scans/${manga}/banner.jpeg` }}
+        source={{ uri: `http://localhost:7001/scans/${mangaName}/banner.jpeg` }}
       />
+
+      <AddFavorites onPress={add_to_favorites}>
+        <TextBtn>ADD Fav</TextBtn>
+      </AddFavorites>
+
       <MangaContent>
         <Title>
-          <MangaName>{manga}</MangaName>
+          <MangaName>{mangaName}</MangaName>
         </Title>
 
         {chapters &&
@@ -100,6 +139,14 @@ const Wrapper = styled.View`
 const Banner = styled.Image`
   width: 100%;
   height: 150px;
+`;
+
+const AddFavorites = styled.TouchableOpacity`
+
+`;
+
+const TextBtn = styled.Text`
+  color: #fff;
 `;
 
 const MangaContent = styled.ScrollView`

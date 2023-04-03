@@ -1,37 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 import Pdf from "react-native-pdf";
+import { useNavigation } from "@react-navigation/native";
 
 const Index = () => {
-  const source = {
-    uri: "http://localhost:7001/scan/Naruto/chap/1.pdf",
-    cache: true,
-  };
+
+  const navigation = useNavigation();
 
   return (
     <>
-      <Background>
-        <Title>My Scans Reader</Title>
+      <Background onPress={() => navigation.navigate('Favorites')}>
+        <Title>Favorites</Title>
       </Background>
-      {/* <Test
-        source={source}
-        onError={(error) => {
-          console.log(error);
-        }}
-        onPressLink={(uri) => {
-          console.log(`Link pressed: ${uri}`);
-        }}
-      /> */}
     </>
   );
 };
 
-const Test = styled(Pdf)`
-  width: 100%;
-  height: 100%;
-`;
-
-const Background = styled.View`
+const Background = styled.TouchableOpacity`
   width: 100%;
   height: 10%;
   background-color: ${props => props.theme.primaryGrey};
