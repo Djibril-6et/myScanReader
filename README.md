@@ -23,3 +23,7 @@ Fonctionnalitées finales :
   - Publicités
   - Notifee
   - Animations
+
+Bonus : 
+
+  -Lecture des scans dans une modal et non dans une nouvelle page
