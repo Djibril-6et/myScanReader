@@ -16,14 +16,14 @@ const Index = () => {
       <Background onPress={() => navigation.navigate("Favorites")}>
         <Title>{I18n.t("fav")} </Title>
       </Background>
-      <View>
+      <Translation>
         <TouchableOpacity onPress={() => setLanguage("en")}>
-          <Text>English</Text>
+          <Title>English</Title>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setLanguage("fr")}>
-          <Text>Français</Text>
+          <Title>Français</Title>
         </TouchableOpacity>
-      </View>
+      </Translation>
     </>
   );
 };
@@ -35,13 +35,18 @@ const Background = styled.TouchableOpacity`
   /* position: absolute;
   bottom: 0; */
 `;
+const Translation = styled.View`
+  display: flex;
+  align-items: center;
+  background-color: darkgray;
+`;
 
 const Title = styled.Text`
   color: #fff;
   text-align: center;
-  height: 40%;
+  height: 20px;
   margin: auto;
-  font-size: 20px;
+  font-size: 15px;
 `;
 
 export default Index;
