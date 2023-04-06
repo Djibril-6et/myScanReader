@@ -3,15 +3,30 @@ import styled from "styled-components";
 import Pdf from "react-native-pdf";
 import { useNavigation } from "@react-navigation/native";
 import I18n from "../../traduction/i18n";
+import { LanguageContext } from "../../traduction/LanguageContext";
+import { Text, View } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Index = () => {
   const navigation = useNavigation();
+
+  function LanguageSelector() {
+    const { setLanguage } = useContext(LanguageContext);
+  }
 
   return (
     <>
       <Background onPress={() => navigation.navigate("Favorites")}>
         <Title>{I18n.t("fav")} </Title>
       </Background>
+      <View>
+        <TouchableOpacity onPress={() => setLanguage("en")}>
+          <Text>English</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setLanguage("fr")}>
+          <Text>Français</Text>
+        </TouchableOpacity>
+      </View>
     </>
   );
 };

@@ -8,16 +8,19 @@ import StackNavigator from "./StackNavigator";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "./src/redux/config/store";
+import { LanguageProvider } from "./src/traduction/LanguageContext";
 
 const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <NavigationContainer>
-          <ThemeProvider theme={theme}>
-            <StackNavigator />
-          </ThemeProvider>
-        </NavigationContainer>
+        <LanguageProvider>
+          <NavigationContainer>
+            <ThemeProvider theme={theme}>
+              <StackNavigator />
+            </ThemeProvider>
+          </NavigationContainer>
+        </LanguageProvider>
       </PersistGate>
     </Provider>
   );
