@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import theme from "./src/config/styledTheme";
 import "react-native-gesture-handler";
@@ -9,20 +9,28 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "./src/redux/config/store";
 import { LanguageProvider } from "./src/traduction/LanguageContext";
+import I18n from "./src/traduction/i18n";
 
 const App = () => {
+  const [language, setLanguage] = useState("en");
+
+  const handleSetLanguage = (lang) => {
+    i18n.locale = lang;
+    setLanguage(lang);
+  };
+
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <LanguageProvider>
+    <LanguageProvider value={{ language, setLanguage: handleSetLanguage }}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
           <NavigationContainer>
             <ThemeProvider theme={theme}>
               <StackNavigator />
             </ThemeProvider>
           </NavigationContainer>
-        </LanguageProvider>
-      </PersistGate>
-    </Provider>
+        </PersistGate>
+      </Provider>
+    </LanguageProvider>
   );
 };
 

@@ -1,18 +1,15 @@
-import React from "react";
+import { React, useContext } from "react";
 import styled from "styled-components";
 import Pdf from "react-native-pdf";
 import { useNavigation } from "@react-navigation/native";
 import I18n from "../../traduction/i18n";
 import { LanguageContext } from "../../traduction/LanguageContext";
-import { Text, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Text, View, TouchableOpacity } from "react-native";
 
 const Index = () => {
   const navigation = useNavigation();
 
-  function LanguageSelector() {
-    const { setLanguage } = useContext(LanguageContext);
-  }
+  const { setLanguage } = useContext(LanguageContext);
 
   return (
     <>

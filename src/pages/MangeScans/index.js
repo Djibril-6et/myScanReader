@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components/native";
 import Header from "../../components/Header";
 import serverService from "../../services/server.service";
@@ -11,6 +11,7 @@ import {
 } from "../../redux/actions/favorites";
 import { Alert } from "react-native";
 import I18n from "../../traduction/i18n";
+import { LanguageContext } from "../../traduction/LanguageContext";
 
 const Index = (props) => {
   const [mangaName, setMangaName] = useState("");
@@ -67,6 +68,8 @@ const Index = (props) => {
       dispatch(addToFavorites(mangaName));
     }
   };
+
+  const { language } = useContext(LanguageContext);
 
   return (
     <Container>

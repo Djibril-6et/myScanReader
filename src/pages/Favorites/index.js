@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import Header from "../../components/Header";
 import { Alert } from "react-native";
 import styled from "styled-components";
@@ -7,6 +7,7 @@ import { deleteFromFavorites } from "../../redux/actions/favorites";
 import Trash from "../../assets/trash.png";
 import { useNavigation } from "@react-navigation/native";
 import I18n from "../../traduction/i18n";
+import { LanguageContext } from "../../traduction/LanguageContext";
 
 const Index = () => {
   const favList = useSelector((state) => state.favorites.favoritesList);
@@ -28,6 +29,8 @@ const Index = () => {
       },
     ]);
   };
+
+  const { language } = useContext(LanguageContext);
 
   return (
     <Container>
