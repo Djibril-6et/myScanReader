@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteFromFavorites } from "../../redux/actions/favorites";
 import Trash from "../../assets/trash.png";
 import { useNavigation } from "@react-navigation/native";
+import I18n from "../../traduction/i18n";
 
 const Index = () => {
   const favList = useSelector((state) => state.favorites.favoritesList);
@@ -13,14 +14,14 @@ const Index = () => {
 
   const navigation = useNavigation();
 
-  const delete_from_favorites = id => {
-    Alert.alert('Delete', 'Are you sure you want to delete this manga ?', [
+  const delete_from_favorites = (id) => {
+    Alert.alert("Delete", "Are you sure you want to delete this manga ?", [
       {
-        text: 'Cancel',
-        style: 'cancel',
+        text: "Cancel",
+        style: "cancel",
       },
       {
-        text: 'YES',
+        text: "YES",
         onPress: () => {
           dispatch(deleteFromFavorites(id));
         },
@@ -29,51 +30,51 @@ const Index = () => {
   };
 
   return (
-    <>
-      <Wrapper>
-        <TitleView>
-          <TitleText>My favorites</TitleText>
-        </TitleView>
+    <Container>
+      <TitleView>
+        <TitleText>{I18n.t("mesFavs")}</TitleText>
+      </TitleView>
 
-        <FavListView>
-          {favList &&
-            favList.map((item) => (
-              <MangaWrapper>
-                <MangaViewImage onPress={() => navigation.navigate('MangaScans', { mangaName : item.manga })}>
-                  <ImageView
-                    source={{
-                      uri: `http://localhost:7001/scans/${item.manga}/banner.jpeg`,
-                    }}
-                  />
-                </MangaViewImage>
-                <DeleteView onPress={() => delete_from_favorites(item.manga)}>
-                  <DeleteImage
-                    source={Trash}
-                  />
-                </DeleteView>
-              </MangaWrapper>
-            ))}
-        </FavListView>
+      <FavListView>
+        {favList &&
+          favList.map((item) => (
+            <MangaWrapper key={item.manga}>
+              <MangaViewImage
+                onPress={() =>
+                  navigation.navigate("MangaScans", { mangaName: item.manga })
+                }
+              >
+                <ImageView
+                  source={{
+                    uri: `http://localhost:7001/scans/${item.manga}/banner.jpeg`,
+                  }}
+                />
+              </MangaViewImage>
+              <DeleteView onPress={() => delete_from_favorites(item.manga)}>
+                <DeleteImage source={Trash} />
+              </DeleteView>
+            </MangaWrapper>
+          ))}
+      </FavListView>
 
-        <MyHeader />
-      </Wrapper>
-    </>
+      <MyHeader />
+    </Container>
   );
 };
 
-const Wrapper = styled.View`
-  height: 100%;
-  width: 100%;
+const Container = styled.View`
+  flex: 1;
+  background-color: #fff;
 `;
 
 const TitleView = styled.View`
   width: 100%;
   height: 70px;
-  margin: 50px 0 0 0;
+  margin-top: 50px;
 `;
 
 const TitleText = styled.Text`
-  color: #fff;
+  color: black;
   margin: auto;
   font-size: 45px;
 `;
@@ -107,7 +108,7 @@ const ImageView = styled.Image`
 const DeleteView = styled.TouchableOpacity`
   width: 19%;
   height: 100%;
-  background-color: ${props => props.theme.primaryGrey};
+  background-color: ${(props) => props.theme.primaryGrey};
   border-radius: 12px;
 `;
 

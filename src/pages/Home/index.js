@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled from "styled-components/native";
 import Header from "../../components/Header";
 import serverService from "../../services/server.service";
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
 const Index = () => {
   const [mangas, setMangas] = useState([]);
@@ -21,69 +21,74 @@ const Index = () => {
   }, []);
 
   return (
-    <Wrapper>
-      <HomeContent>
+    <Container>
+      <HeaderContainer>
+        <Header />
+      </HeaderContainer>
+      <ContentContainer>
         <Grid>
           {mangas &&
             mangas.map((manga) => (
-              <>
-                <Card onPress={() => navigation.navigate('MangaScans', { mangaName : manga })}>
-                  <ImageT
-                    source={{
-                      uri: `http://localhost:7001/scans/${manga}/squared.jpeg`,
-                    }}
-                  />
-                  <Title><MangaName>{manga}</MangaName></Title>
-                </Card>
-              </>
+              <Card
+                key={manga}
+                onPress={() =>
+                  navigation.navigate("MangaScans", { mangaName: manga })
+                }
+              >
+                <CardImage
+                  source={{
+                    uri: `http://localhost:7001/scans/${manga}/squared.jpeg`,
+                  }}
+                />
+                <MangaTitle>{manga}</MangaTitle>
+              </Card>
             ))}
         </Grid>
-      </HomeContent>
-      <HeaderView />
-    </Wrapper>
+      </ContentContainer>
+    </Container>
   );
 };
 
-const Wrapper = styled.View`
-  height: 100%;
-  width: 100%;
+const Container = styled.View`
+  flex: 1;
+  background-color: #f8f8f8;
 `;
 
-const HomeContent = styled.ScrollView`
-  width: 95%;
-  /* margin: 0 auto; */
-  margin: 50px auto 0 auto;
+const HeaderContainer = styled.View`
+  margin-top: -10px;
+  height: 100px;
+  background-color: darkgray;
+`;
+
+const ContentContainer = styled.ScrollView`
+  padding: 30px;
 `;
 
 const Grid = styled.View`
-  height: 100%;
-  width: 100%;
-  display: flex;
   flex-direction: row;
-  justify-content: space-between;
   flex-wrap: wrap;
 `;
 
 const Card = styled.TouchableOpacity`
   width: 48%;
+  margin-right: 2%;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  elevation: 5;
+`;
+
+const CardImage = styled.Image`
   height: 200px;
-  margin: 0 0 10px 0;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 `;
 
-const ImageT = styled.Image`
-  width: 100%;
-  height: 85%;
+const MangaTitle = styled.Text`
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  padding: 15px;
 `;
-
-const Title = styled.View`
-    height: 10%;
-    margin: auto 0;
-`;
-const MangaName = styled.Text`
-    color: white;
-    margin: auto 0;
-`;
-
-const HeaderView = styled(Header)``;
 
 export default Index;
