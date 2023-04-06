@@ -6,7 +6,7 @@ Fonctionnalitées prévues pour le 6 Avril :
   - Styled Components
   - Coder proprement
   - ES6
-  - Récuperer et afficher des scans en PDF
+  - Récuperer et afficher des scans en PDF ( React-native Modal )
   - Conserver les favoris avec Redux
   - Style de l'app
   - I18N
@@ -23,7 +23,3 @@ Fonctionnalitées finales :
   - Publicités
   - Notifee
   - Animations
-
-Bonus : 
-
-  -Lecture des scans dans une modal et non dans une nouvelle page
