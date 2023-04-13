@@ -73,8 +73,8 @@ const Title = styled.Text`
 `;
 
 const MenuBtn = styled.TouchableOpacity`
-  width: 11%;
-  height: 50%;
+  width: 8%;
+  height: 40%;
 `;
 
 const MenuIcon = styled.Image`
@@ -83,8 +83,8 @@ const MenuIcon = styled.Image`
 `;
 
 const HomeBtn = styled.TouchableOpacity`
-  width: 11%;
-  height: 50%;
+  width: 8%;
+  height: 40%;
 `;
 
 const HomeIcon = styled.Image`
@@ -93,8 +93,8 @@ const HomeIcon = styled.Image`
 `;
 
 const FavoritesBtn = styled.TouchableOpacity`
-  width: 11%;
-  height: 50%;
+  width: 8%;
+  height: 40%;
 `;
 
 const FavoritesIcon = styled.Image`
