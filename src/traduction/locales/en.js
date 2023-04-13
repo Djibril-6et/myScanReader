@@ -1,6 +1,6 @@
 const en = {
   chapter: "Chapter",
-  fav: "Favotites",
+  fav: "Favorites",
   add: "Add fav",
   close: "Close",
   horizontal: "Horizontal",

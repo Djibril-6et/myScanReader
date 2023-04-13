@@ -75,7 +75,6 @@ const Card = styled.TouchableOpacity`
   margin-bottom: 20px;
   background-color: #fff;
   border-radius: 8px;
-  elevation: 5;
 `;
 
 const CardImage = styled.Image`

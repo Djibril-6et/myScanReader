@@ -9,6 +9,7 @@ import {
   addToFavorites,
   deleteFromFavorites,
 } from "../../redux/actions/favorites";
+import { storePage, updateChapterPage } from "../../redux/actions/viewedpage";
 import { Alert } from "react-native";
 import I18n from "../../traduction/i18n";
 import { LanguageContext } from "../../traduction/LanguageContext";
@@ -21,7 +22,12 @@ const Index = (props) => {
   const [horizontalView, setHorizontalView] = useState(false);
 
   const favList = useSelector((state) => state.favorites.favoritesList);
+  const viewedPageList = useSelector(
+    (state) => state.viewedpage.lastViewedPages
+  );
   const dispatch = useDispatch();
+
+  const [lastPageViewed, setLastPageViewed] = useState(0);
 
   useEffect(() => {
     setMangaName(props.route.params.mangaName);
@@ -69,7 +75,33 @@ const Index = (props) => {
     }
   };
 
-  const { language } = useContext(LanguageContext);
+  const handleChangePage = (selectedChapter, page) => {
+    if (viewedPageList.some((item) => item.id === selectedChapter)) {
+      dispatch(updateChapterPage(selectedChapter, page));
+    } else {
+      dispatch(storePage(selectedChapter, page));
+    }
+  };
+
+  const [page, setPage] = useState(1);
+
+  const getPageIndex = (chapter) => {
+    if (viewedPageList.some((item) => item.id === chapter)) {
+      foundItem = viewedPageList.find((item) => item.id === chapter);
+      setPage(foundItem.page);
+    } else {
+      setPage(1);
+    }
+  };
+
+  const getChapterBackgroundColor = chapter => {
+    if (viewedPageList.some((item) => item.id === chapter)) {
+      return "#A7A1D8"
+    }
+    else {
+      return "#696969"
+    }
+  }
 
   return (
     <Container>
@@ -92,9 +124,11 @@ const Index = (props) => {
           chapters.map((chapter) => (
             <ChapterButton
               key={chapter}
+              bgColor={getChapterBackgroundColor(chapter)}
               onPress={() => {
-                setModalVisible(!modalVisible);
                 setSelectedChapter(chapter);
+                getPageIndex(chapter);
+                setModalVisible(!modalVisible);
               }}
             >
               <ChapterTitle>
@@ -125,13 +159,12 @@ const Index = (props) => {
               onError={(error) => {
                 console.log(error);
               }}
-              onPressLink={(uri) => {
-                console.log(`Link pressed: ${uri}`);
-              }}
               horizontal={horizontalView}
               spacing={10}
               enablePaging={true}
-              style={{ backgroundColor: "#0A0A0A" }}
+              style={{ backgroundColor: "#000" }}
+              page={page}
+              onPageChanged={(page) => handleChangePage(selectedChapter, page)}
             />
           </PdfView>
         </PdfContainer>
@@ -181,7 +214,7 @@ const MangaName = styled.Text`
 `;
 
 const ChapterButton = styled.TouchableOpacity`
-  background-color: ${(props) => props.theme.primaryGrey};
+  background-color: ${(props) => props.bgColor};
   padding: 20px;
   margin-bottom: 10px;
 `;
@@ -205,11 +238,12 @@ const HeadView = styled.View`
   align-items: center;
   height: 100px;
   padding: 10px;
+  background-color: ${(props) => props.theme.primaryGrey};
 `;
 
 const CloseModal = styled.TouchableOpacity`
   height: 35px;
-  width: 15%;
+  width: 17%;
 `;
 
 const CloseText = styled.Text`
