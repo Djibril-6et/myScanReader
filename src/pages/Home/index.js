@@ -22,9 +22,6 @@ const Index = () => {
 
   return (
     <Container>
-      <HeaderContainer>
-        <Header />
-      </HeaderContainer>
       <ContentContainer>
         <Grid>
           {mangas &&
@@ -45,6 +42,7 @@ const Index = () => {
             ))}
         </Grid>
       </ContentContainer>
+      <Header />
     </Container>
   );
 };
