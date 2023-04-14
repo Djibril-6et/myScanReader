@@ -29,6 +29,8 @@ const Index = (props) => {
 
   const [lastPageViewed, setLastPageViewed] = useState(0);
 
+  const { language } = useContext(LanguageContext);
+
   useEffect(() => {
     setMangaName(props.route.params.mangaName);
     serverService
