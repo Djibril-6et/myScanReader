@@ -10,9 +10,17 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "./src/redux/config/store";
 import { LanguageProvider } from "./src/traduction/LanguageContext";
 import I18n from "./src/traduction/i18n";
+import Header from "./src/components/Header"
 
 const App = () => {
   const [language, setLanguage] = useState("en");
+
+  const [myTheme, setTheme] = useState("dark");
+  const isDarkTheme = myTheme === 'dark'
+
+  const toggleTheme = () => {
+    setTheme(isDarkTheme ? 'light' : 'dark')
+  }
 
   const handleSetLanguage = (lang) => {
     i18n.locale = lang;
@@ -24,8 +32,9 @@ const App = () => {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <NavigationContainer>
-            <ThemeProvider theme={theme}>
-              <StackNavigator />
+            <ThemeProvider theme={isDarkTheme ? theme.darkTheme : theme.lightTheme}>
+              <StackNavigator/>
+              <Header toggleTheme={toggleTheme}/>
             </ThemeProvider>
           </NavigationContainer>
         </PersistGate>

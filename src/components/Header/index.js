@@ -7,8 +7,9 @@ import { Text, View, TouchableOpacity } from "react-native";
 import IconMenu from "../../assets/menu.png";
 import IconHome from "../../assets/home.png";
 import IconFav from "../../assets/favorites.png";
+import Switcher from "../ThemeSwitcher"
 
-const Index = () => {
+const Index = ({toggleTheme}) => {
   const navigation = useNavigation();
 
   const [isModal, setIsModal] = useState(false);
@@ -45,6 +46,7 @@ const Index = () => {
                 <Title>Français</Title>
               </TouchableOpacity>
             </Translation>
+            <Switcher toggleTheme={toggleTheme}/>
           </MenuContainer>
           </CloseMenuView>
       </MenuModal>
@@ -59,7 +61,7 @@ const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
   padding: 10px 10px 0 10px;
-  background-color: ${(props) => props.theme.primaryGrey};
+  background-color: ${(props) => props.theme.globalPrimaryColor};
   /* position: absolute;
   bottom: 0; */
 `;
@@ -114,7 +116,7 @@ const MenuContainer = styled.View`
   width: 70%;
   height: 100%;
   margin-left: auto;
-  background-color: ${(props) => props.theme.primaryGrey};
+  background-color: ${(props) => props.theme.primaryColor};
 `;
 
 const HeadView = styled.View`
@@ -124,7 +126,7 @@ const HeadView = styled.View`
   height: 100px;
   padding: 0 0 0 10px;
   margin: 10px 0 0 0;
-  background-color: ${(props) => props.theme.primaryGrey};
+  background-color: ${(props) => props.theme.primaryColor};
 `;
 
 const CloseModal = styled.TouchableOpacity`
@@ -132,7 +134,7 @@ const CloseModal = styled.TouchableOpacity`
 `;
 
 const CloseText = styled.Text`
-  color: #fff;
+  color: ${(props) => props.theme.text};
   font-size: 20px;
 `;
 

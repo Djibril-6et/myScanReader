@@ -59,15 +59,13 @@ const Index = () => {
             </MangaWrapper>
           ))}
       </FavListView>
-
-      <MyHeader />
     </Container>
   );
 };
 
 const Container = styled.View`
   flex: 1;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.primaryColor};
 `;
 
 const TitleView = styled.View`
@@ -77,7 +75,7 @@ const TitleView = styled.View`
 `;
 
 const TitleText = styled.Text`
-  color: black;
+  color: ${(props) => props.theme.text};
   margin: auto;
   font-size: 45px;
 `;
@@ -99,7 +97,6 @@ const MangaViewImage = styled.TouchableOpacity`
   width: 78%;
   height: 100%;
   border-radius: 12px;
-  background-color: blue;
 `;
 
 const ImageView = styled.Image`
@@ -111,7 +108,7 @@ const ImageView = styled.Image`
 const DeleteView = styled.TouchableOpacity`
   width: 19%;
   height: 100%;
-  background-color: ${(props) => props.theme.primaryGrey};
+  background-color: ${(props) => props.theme.secondaryColor};
   border-radius: 12px;
 `;
 
@@ -120,7 +117,5 @@ const DeleteImage = styled.Image`
   height: 40%;
   margin: auto;
 `;
-
-const MyHeader = styled(Header)``;
 
 export default Index;

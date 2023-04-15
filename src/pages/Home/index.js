@@ -42,14 +42,13 @@ const Index = () => {
             ))}
         </Grid>
       </ContentContainer>
-      <Header />
     </Container>
   );
 };
 
 const Container = styled.View`
   flex: 1;
-  background-color: #f8f8f8;
+  background-color: ${(props) => props.theme.primaryColor};
 `;
 
 const HeaderContainer = styled.View`
@@ -71,7 +70,7 @@ const Card = styled.TouchableOpacity`
   width: 48%;
   margin-right: 2%;
   margin-bottom: 20px;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.secondaryColor};
   border-radius: 8px;
 `;
 
@@ -84,7 +83,7 @@ const CardImage = styled.Image`
 const MangaTitle = styled.Text`
   font-size: 16px;
   font-weight: 600;
-  color: #333;
+  color: ${(props) => props.theme.text};
   padding: 15px;
 `;
 

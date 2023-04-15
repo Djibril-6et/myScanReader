@@ -171,8 +171,6 @@ const Index = (props) => {
           </PdfView>
         </PdfContainer>
       </PdfModal>
-
-      <HeaderView />
     </Container>
   );
 };
@@ -191,7 +189,7 @@ const AddFavorites = styled.TouchableOpacity`
   position: absolute;
   top: 20px;
   right: 20px;
-  background-color: ${(props) => props.theme.primaryGrey};
+  background-color: ${(props) => props.theme.globalPrimaryColor};
   padding: 10px;
   border-radius: 5px;
 `;
@@ -240,7 +238,7 @@ const HeadView = styled.View`
   align-items: center;
   height: 100px;
   padding: 10px;
-  background-color: ${(props) => props.theme.primaryGrey};
+  background-color: ${(props) => props.theme.globalPrimaryColor};
 `;
 
 const CloseModal = styled.TouchableOpacity`
@@ -274,7 +272,5 @@ const ChapterPdf = styled(Pdf)`
   width: 100%;
   height: 100%;
 `;
-
-const HeaderView = styled(Header)``;
 
 export default Index;
