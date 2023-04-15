@@ -16,7 +16,7 @@ Fonctionnalitées finales :
 
   - Loader
   - React-native-flash-message
-  - Thème sombre/claire
+  - Thème sombre/claire ✔
   - Splash Screen
   - react-native-share
   - Reprendre la on ou s'est arrêter dans les chapitres ✔
