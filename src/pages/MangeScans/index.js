@@ -101,7 +101,7 @@ const Index = (props) => {
       return "#A7A1D8"
     }
     else {
-      return "#696969"
+      return "#A9A9A9"
     }
   }
 
@@ -202,6 +202,7 @@ const TextBtn = styled.Text`
 const MangaContent = styled.ScrollView`
   flex: 1;
   padding: 30px;
+  background-color: ${(props) => props.theme.primaryColor};
 `;
 
 const Title = styled.View`
@@ -211,6 +212,7 @@ const Title = styled.View`
 const MangaName = styled.Text`
   font-size: 24px;
   font-weight: bold;
+  color: ${(props) => props.theme.text};
 `;
 
 const ChapterButton = styled.TouchableOpacity`
@@ -238,7 +240,6 @@ const HeadView = styled.View`
   align-items: center;
   height: 100px;
   padding: 10px;
-  background-color: ${(props) => props.theme.globalPrimaryColor};
 `;
 
 const CloseModal = styled.TouchableOpacity`
