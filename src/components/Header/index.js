@@ -3,18 +3,46 @@ import styled from "styled-components";
 import { useNavigation } from "@react-navigation/native";
 import I18n from "../../traduction/i18n";
 import { LanguageContext } from "../../traduction/LanguageContext";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, Alert } from "react-native";
 import IconMenu from "../../assets/menu.png";
 import IconHome from "../../assets/home.png";
 import IconFav from "../../assets/favorites.png";
-import Switcher from "../ThemeSwitcher"
+import Switcher from "../ThemeSwitcher";
+import { Share } from "react-native";
 
-const Index = ({toggleTheme}) => {
+const Index = ({ toggleTheme }) => {
   const navigation = useNavigation();
 
   const [isModal, setIsModal] = useState(false);
 
   const { setLanguage } = useContext(LanguageContext);
+
+  // const share = () => {
+  //   Share.open({
+  //     url: "http://localhost:7001/scans",
+  //     message: "Share the app"
+  // }).catch(err => err && console.log(err));
+  // }
+
+  const share = () => {
+    try {
+      const result = Share.share({
+        message:
+          "Look at this new scan reader application | https://Appstore//MyScanReader",
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      Alert.alert(error.message);
+    }
+  };
 
   return (
     <>
@@ -46,9 +74,12 @@ const Index = ({toggleTheme}) => {
                 <Title>Français</Title>
               </TouchableOpacity>
             </Translation>
-            <Switcher toggleTheme={toggleTheme}/>
+            <Switcher toggleTheme={toggleTheme} />
+            <TouchableOpacity onPress={share}>
+              <Title>Share</Title>
+            </TouchableOpacity>
           </MenuContainer>
-          </CloseMenuView>
+        </CloseMenuView>
       </MenuModal>
     </>
   );
