@@ -18,7 +18,7 @@ Fonctionnalitées finales :
   - React-native-flash-message
   - Thème sombre/claire ✔
   - Splash Screen
-  - react-native-share
+  - react-native-share ✔
   - Reprendre la on ou s'est arrêter dans les chapitres ✔
   - Publicités
   - Notifee
