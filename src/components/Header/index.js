@@ -9,6 +9,7 @@ import IconHome from "../../assets/home.png";
 import IconFav from "../../assets/favorites.png";
 import Switcher from "../ThemeSwitcher";
 import { Share } from "react-native";
+import notifee from "@notifee/react-native";
 
 const Index = ({ toggleTheme }) => {
   const navigation = useNavigation();
@@ -44,6 +45,22 @@ const Index = ({ toggleTheme }) => {
     }
   };
 
+  const handleNotification = async () => {
+    await notifee.requestPermission();
+    await notifee.createChannel({
+      id: "default",
+      name: "Default Channel",
+    });
+
+    await notifee.displayNotification({
+      title: "My Scan Reader",
+      body: "N'oubliez pas de venir lire vos mangas préférez",
+      android: {
+        channelId: "default",
+      },
+    });
+  };
+
   return (
     <>
       <Header>
@@ -77,6 +94,9 @@ const Index = ({ toggleTheme }) => {
             <Switcher toggleTheme={toggleTheme} />
             <TouchableOpacity onPress={share}>
               <Title>Share</Title>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleNotification}>
+              <Title>Send notification</Title>
             </TouchableOpacity>
           </MenuContainer>
         </CloseMenuView>
