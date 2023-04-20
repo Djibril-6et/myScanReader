@@ -6,6 +6,8 @@ const en = {
   horizontal: "Horizontal",
   vertical: "Vertical",
   mesFavs: "My Favorites",
+  selectLanguage: "Select Language",
+  selectTheme: "Switch Theme",
 };
 
 export default en;

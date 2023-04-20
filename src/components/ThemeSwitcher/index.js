@@ -18,11 +18,16 @@ const Index = ({toggleTheme}) => {
 }
 
 const Switcher = styled.TouchableOpacity`
-    
+  background-color: ${(props) => props.theme.secondaryColor};
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
 `;
 
 const TextSwitch = styled.Text`
-    color: ${(props) => props.theme.text};
+  color: ${(props) => props.theme.text};
+  font-size: 18px;
+  text-align: center;
 `;
 
 export default Index;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigation } from "@react-navigation/native";
 import I18n from "../../traduction/i18n";
 import { LanguageContext } from "../../traduction/LanguageContext";
-import { Text, View, TouchableOpacity, Alert } from "react-native";
+import { Text, View, TouchableOpacity, Alert, StyleSheet } from "react-native";
 import IconMenu from "../../assets/menu.png";
 import IconHome from "../../assets/home.png";
 import IconFav from "../../assets/favorites.png";
@@ -15,6 +15,7 @@ const Index = ({ toggleTheme }) => {
   const navigation = useNavigation();
 
   const [isModal, setIsModal] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState("");
 
   const { setLanguage } = useContext(LanguageContext);
 
@@ -76,30 +77,51 @@ const Index = ({ toggleTheme }) => {
       </Header>
 
       <MenuModal visible={isModal} transparent={true}>
-        <CloseMenuView onPress={() => setIsModal(!isModal)}>
+        <FlexModal>
+          <CloseMenuView onPress={() => setIsModal(!isModal)} />
           <MenuContainer>
-            <HeadView>
-              <CloseModal onPress={() => setIsModal(!isModal)}>
-                <CloseText>{I18n.t("close")} </CloseText>
-              </CloseModal>
-            </HeadView>
-            <Translation>
-              <Button onPress={() => setLanguage("en")}>
-                <ButtonText>English</ButtonText>
+            <Top>
+              <HeadView>
+                <CloseModal onPress={() => setIsModal(!isModal)}>
+                  <CloseText>X</CloseText>
+                </CloseModal>
+              </HeadView>
+
+              <MenuTitleView>
+                <MenuTitle>MENU</MenuTitle>
+              </MenuTitleView>
+
+              <TitleView>
+                <TitleText>{I18n.t("selectLanguage")}</TitleText>
+                <Divider />
+              </TitleView>
+              <Translation>
+                <TranslationButton onPress={() => setLanguage("en")}>
+                  <ButtonText>EN</ButtonText>
+                </TranslationButton>
+                <TranslationButton onPress={() => setLanguage("fr")}>
+                  <ButtonText>FR</ButtonText>
+                </TranslationButton>
+                <TranslationButton onPress={() => setLanguage("pt")}>
+                  <ButtonText>PT</ButtonText>
+                </TranslationButton>
+              </Translation>
+              <TitleView>
+                <TitleText>{I18n.t("selectTheme")}</TitleText>
+                <Divider />
+              </TitleView>
+              <Switcher toggleTheme={toggleTheme} />
+            </Top>
+            <Bot>
+              <Button onPress={share}>
+                <ButtonText>Share</ButtonText>
               </Button>
-              <Button onPress={() => setLanguage("fr")}>
-                <ButtonText>Français</ButtonText>
+              <Button onPress={handleNotification}>
+                <ButtonText>Send notification</ButtonText>
               </Button>
-            </Translation>
-            <Switcher toggleTheme={toggleTheme} />
-            <Button onPress={share}>
-              <ButtonText>Share</ButtonText>
-            </Button>
-            <Button onPress={handleNotification}>
-              <ButtonText>Send notification</ButtonText>
-            </Button>
+            </Bot>
           </MenuContainer>
-        </CloseMenuView>
+        </FlexModal>
       </MenuModal>
     </>
   );
@@ -168,8 +190,15 @@ const FavoritesIcon = styled.Image`
 
 const MenuModal = styled.Modal``;
 
-const CloseMenuView = styled.TouchableOpacity`
+const FlexModal = styled.View`
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+`;
+
+const CloseMenuView = styled.TouchableOpacity`
+  width: 30%;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.7);
 `;
@@ -177,32 +206,84 @@ const CloseMenuView = styled.TouchableOpacity`
 const MenuContainer = styled.View`
   width: 70%;
   height: 100%;
-  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: ${(props) => props.theme.primaryColor};
+`;
+
+const Top = styled.View`
+  background-color: ${(props) => props.theme.primaryColor};
+`;
+
+const Bot = styled.View`
   background-color: ${(props) => props.theme.primaryColor};
 `;
 
 const HeadView = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  height: 100px;
+  height: 55px;
   padding: 0 0 0 10px;
-  margin: 10px 0 0 0;
-  background-color: ${(props) => props.theme.primaryColor};
+  margin: 0 0 20px 0;
+  background-color: ${(props) => props.theme.secondaryColor};
 `;
 
 const CloseModal = styled.TouchableOpacity`
   height: 35px;
+  margin: auto auto 0 0;
+  /* border-radius: 5px;
+  background-color: ${(props) => props.theme.secondaryColor}; */
 `;
 
 const CloseText = styled.Text`
   color: ${(props) => props.theme.text};
+  margin: auto 0;
   font-size: 20px;
 `;
 
 const Translation = styled.View`
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  width: 85%;
+`;
+
+const TranslationButton = styled.TouchableOpacity`
+  background-color: ${(props) => props.theme.secondaryColor};
+  width: 30%;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+`;
+
+const TitleView = styled.View`
+  width: 92%;
+  height: 30px;
+  margin: 0 auto;
+`;
+
+const TitleText = styled.Text`
+  margin: auto 0;
+  color: ${(props) => props.theme.text};
+`;
+
+const MenuTitleView = styled.View`
+  width: 92%;
+  height: 50px;
+  margin: 0 auto 10px auto;
+`;
+
+const MenuTitle = styled.Text`
+  margin: auto;
+  color: ${(props) => props.theme.text};
+  font-size: 30px;
+`;
+
+const Divider = styled.View`
+  width: 100%;
+  height: 1px;
+  background-color: ${(props) => props.theme.text};
 `;
 
 export default Index;
