@@ -15,11 +15,10 @@ Fonctionnalitées prévues pour le 6 Avril :
 Fonctionnalitées finales :
 
   - Loader
-  - React-native-flash-message
   - Thème sombre/claire ✔
   - Splash Screen ✔
   - react-native-share ✔
   - Reprendre la on ou s'est arrêter dans les chapitres ✔
   - Publicités
-  - Notifee
+  - Notifee ✔
   - Animations
