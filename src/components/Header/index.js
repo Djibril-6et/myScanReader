@@ -84,20 +84,20 @@ const Index = ({ toggleTheme }) => {
               </CloseModal>
             </HeadView>
             <Translation>
-              <TouchableOpacity onPress={() => setLanguage("en")}>
-                <Title>English</Title>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => setLanguage("fr")}>
-                <Title>Français</Title>
-              </TouchableOpacity>
+              <Button onPress={() => setLanguage("en")}>
+                <ButtonText>English</ButtonText>
+              </Button>
+              <Button onPress={() => setLanguage("fr")}>
+                <ButtonText>Français</ButtonText>
+              </Button>
             </Translation>
             <Switcher toggleTheme={toggleTheme} />
-            <TouchableOpacity onPress={share}>
-              <Title>Share</Title>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleNotification}>
-              <Title>Send notification</Title>
-            </TouchableOpacity>
+            <Button onPress={share}>
+              <ButtonText>Share</ButtonText>
+            </Button>
+            <Button onPress={handleNotification}>
+              <ButtonText>Send notification</ButtonText>
+            </Button>
           </MenuContainer>
         </CloseMenuView>
       </MenuModal>
@@ -113,8 +113,6 @@ const Header = styled.View`
   justify-content: space-between;
   padding: 10px 10px 0 10px;
   background-color: ${(props) => props.theme.globalPrimaryColor};
-  /* position: absolute;
-  bottom: 0; */
 `;
 
 const Title = styled.Text`
@@ -123,6 +121,19 @@ const Title = styled.Text`
   height: 20px;
   margin: auto;
   font-size: 15px;
+`;
+
+const Button = styled.TouchableOpacity`
+  background-color: ${(props) => props.theme.secondaryColor};
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+`;
+
+const ButtonText = styled.Text`
+  color: ${(props) => props.theme.text};
+  font-size: 18px;
+  text-align: center;
 `;
 
 const MenuBtn = styled.TouchableOpacity`
@@ -192,7 +203,6 @@ const CloseText = styled.Text`
 const Translation = styled.View`
   display: flex;
   align-items: center;
-  background-color: darkgray;
 `;
 
 export default Index;
