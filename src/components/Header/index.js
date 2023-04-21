@@ -1,21 +1,30 @@
-import { React, useContext, useState } from "react";
+import { React, useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigation } from "@react-navigation/native";
 import I18n from "../../traduction/i18n";
 import { LanguageContext } from "../../traduction/LanguageContext";
-import { Text, View, TouchableOpacity, Alert, StyleSheet } from "react-native";
+import { Alert } from "react-native";
 import IconMenu from "../../assets/menu.png";
 import IconHome from "../../assets/home.png";
 import IconFav from "../../assets/favorites.png";
 import Switcher from "../ThemeSwitcher";
 import { Share } from "react-native";
 import notifee from "@notifee/react-native";
+import ShareIcon from "../../assets/share.png";
+import ShareIconDark from "../../assets/share-dark.png";
+import NotificationIcon from "../../assets/bell.png";
+import NotificationIconDark from "../../assets/bell-dark.png";
+import { useDispatch, useSelector } from "react-redux";
 
-const Index = ({ toggleTheme }) => {
+const Index = ({ toggleTheme, myTheme }) => {
   const navigation = useNavigation();
-
+  const [currentTheme, setCurrentTheme] = useState(myTheme);
   const [isModal, setIsModal] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("");
+
+  const viewedPageList = useSelector(
+    (state) => state.viewedpage.lastViewedPages
+  );
 
   const { setLanguage } = useContext(LanguageContext);
 
@@ -25,6 +34,15 @@ const Index = ({ toggleTheme }) => {
   //     message: "Share the app"
   // }).catch(err => err && console.log(err));
   // }
+
+  useEffect(() => {
+    console.log(myTheme);
+  }, []);
+
+  const getNumberReadedChapter = () => {
+    let number = viewedPageList.length;
+    return `Vous avez lu ${number} chapitre(s) !`;
+  }
 
   const share = () => {
     try {
@@ -55,11 +73,19 @@ const Index = ({ toggleTheme }) => {
 
     await notifee.displayNotification({
       title: "My Scan Reader",
-      body: "N'oubliez pas de venir lire vos mangas préférez",
+      body: getNumberReadedChapter(),
       android: {
         channelId: "default",
       },
     });
+  };
+
+  const getSendIcon = (theme) => {
+    return theme === "dark" ? ShareIcon : ShareIconDark;
+  };
+
+  const getNotificationIcon = (theme) => {
+    return theme === "dark" ? NotificationIcon : NotificationIconDark;
   };
 
   return (
@@ -97,13 +123,13 @@ const Index = ({ toggleTheme }) => {
               </TitleView>
               <Translation>
                 <TranslationButton onPress={() => setLanguage("en")}>
-                  <ButtonText>EN</ButtonText>
+                  <ButtonText size={"30px"}>🇬🇧</ButtonText>
                 </TranslationButton>
                 <TranslationButton onPress={() => setLanguage("fr")}>
-                  <ButtonText>FR</ButtonText>
+                  <ButtonText size={"30px"}>🇫🇷</ButtonText>
                 </TranslationButton>
                 <TranslationButton onPress={() => setLanguage("pt")}>
-                  <ButtonText>PT</ButtonText>
+                  <ButtonText size={"30px"}>🇵🇹</ButtonText>
                 </TranslationButton>
               </Translation>
               <TitleView>
@@ -114,10 +140,10 @@ const Index = ({ toggleTheme }) => {
             </Top>
             <Bot>
               <Button onPress={share}>
-                <ButtonText>Share</ButtonText>
+                <IconShare source={getSendIcon(currentTheme)} />
               </Button>
               <Button onPress={handleNotification}>
-                <ButtonText>Send notification</ButtonText>
+                <IconShare source={getNotificationIcon(currentTheme)} />
               </Button>
             </Bot>
           </MenuContainer>
@@ -154,7 +180,7 @@ const Button = styled.TouchableOpacity`
 
 const ButtonText = styled.Text`
   color: ${(props) => props.theme.text};
-  font-size: 18px;
+  font-size: ${(props) => props.size || "18px"};
   text-align: center;
 `;
 
@@ -217,6 +243,9 @@ const Top = styled.View`
 `;
 
 const Bot = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   background-color: ${(props) => props.theme.primaryColor};
 `;
 
@@ -247,12 +276,13 @@ const Translation = styled.View`
   justify-content: space-between;
   align-items: center;
   width: 85%;
+  margin: 0 0 10px 0;
 `;
 
 const TranslationButton = styled.TouchableOpacity`
   background-color: ${(props) => props.theme.secondaryColor};
   width: 30%;
-  padding: 10px;
+  padding: 5px;
   margin: 10px;
   border-radius: 5px;
 `;
@@ -285,5 +315,7 @@ const Divider = styled.View`
   height: 1px;
   background-color: ${(props) => props.theme.text};
 `;
+
+const IconShare = styled.Image``;
 
 export default Index;

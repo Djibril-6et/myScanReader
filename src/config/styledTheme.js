@@ -1,6 +1,7 @@
 const darkTheme = {
     globalPrimaryColor: '#696969',
-    primaryColor: '#0A0A0A',
+    primaryColor: '#0f0c29',
+    // primaryColor: '#0A0A0A',
     secondaryColor: '#A9A9A9',
     text: '#fff',
 }

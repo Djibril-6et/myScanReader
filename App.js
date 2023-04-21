@@ -41,7 +41,7 @@ const App = () => {
           <NavigationContainer>
             <ThemeProvider theme={isDarkTheme ? theme.darkTheme : theme.lightTheme}>
               <StackNavigator/>
-              <Header toggleTheme={toggleTheme}/>
+              <Header toggleTheme={toggleTheme} myTheme={myTheme}/>
             </ThemeProvider>
           </NavigationContainer>
         </PersistGate>
