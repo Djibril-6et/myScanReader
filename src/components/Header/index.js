@@ -28,17 +28,6 @@ const Index = ({ toggleTheme, myTheme }) => {
 
   const { setLanguage } = useContext(LanguageContext);
 
-  // const share = () => {
-  //   Share.open({
-  //     url: "http://localhost:7001/scans",
-  //     message: "Share the app"
-  // }).catch(err => err && console.log(err));
-  // }
-
-  useEffect(() => {
-    console.log(myTheme);
-  }, []);
-
   const getNumberReadedChapter = () => {
     let number = viewedPageList.length;
     return `Vous avez lu ${number} chapitre(s) !`;

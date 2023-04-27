@@ -185,8 +185,7 @@ const Index = (props) => {
               enablePaging={true}
               style={{ backgroundColor: "#000" }}
               page={page}
-              onLoadComplete={(numberOfPages) => {setLastPage(numberOfPages)
-              console.log("lastPage ", lastPage)}}
+              onLoadComplete={(numberOfPages) => setLastPage(numberOfPages)}
               onPageChanged={(page) => handleChangePage(selectedChapter, page)}
             />
           </PdfView>
