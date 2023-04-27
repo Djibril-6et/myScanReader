@@ -13,6 +13,7 @@ import { storePage, updateChapterPage } from "../../redux/actions/viewedpage";
 import { Alert } from "react-native";
 import I18n from "../../traduction/i18n";
 import { LanguageContext } from "../../traduction/LanguageContext";
+import notifee from "@notifee/react-native";
 
 const Index = (props) => {
   const [mangaName, setMangaName] = useState("");
@@ -27,7 +28,7 @@ const Index = (props) => {
   );
   const dispatch = useDispatch();
 
-  const [lastPageViewed, setLastPageViewed] = useState(0);
+  const [lastPage, setLastPage] = useState(0);
 
   const { language } = useContext(LanguageContext);
 
@@ -77,12 +78,30 @@ const Index = (props) => {
     }
   };
 
+  const handleNotification = async () => {
+    await notifee.requestPermission();
+    await notifee.createChannel({
+      id: "default",
+      name: "Default Channel",
+    });
+
+    await notifee.displayNotification({
+      title: "My Scan Reader",
+      body: "Vous êtes à la dernière page !",
+      android: {
+        channelId: "default",
+      },
+    });
+  };
+
   const handleChangePage = (selectedChapter, page) => {
     if (viewedPageList.some((item) => item.id === selectedChapter)) {
       dispatch(updateChapterPage(selectedChapter, page));
     } else {
       dispatch(storePage(selectedChapter, page));
     }
+
+    if(page == lastPage) handleNotification();
   };
 
   const [page, setPage] = useState(1);
@@ -166,6 +185,8 @@ const Index = (props) => {
               enablePaging={true}
               style={{ backgroundColor: "#000" }}
               page={page}
+              onLoadComplete={(numberOfPages) => {setLastPage(numberOfPages)
+              console.log("lastPage ", lastPage)}}
               onPageChanged={(page) => handleChangePage(selectedChapter, page)}
             />
           </PdfView>

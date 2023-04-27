@@ -205,7 +205,7 @@ const HomeIcon = styled.Image`
 `;
 
 const FavoritesBtn = styled.TouchableOpacity`
-  width: 8%;
+  width: 7%;
   height: 40%;
 `;
 
