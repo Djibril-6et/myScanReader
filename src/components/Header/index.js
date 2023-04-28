@@ -143,7 +143,7 @@ const Index = ({ toggleTheme, myTheme }) => {
 
 const Header = styled.View`
   width: 100%;
-  height: 10%;
+  height: 7%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -174,7 +174,7 @@ const ButtonText = styled.Text`
 
 const MenuBtn = styled.TouchableOpacity`
   width: 8%;
-  height: 40%;
+  height: 70%;
 `;
 
 const MenuIcon = styled.Image`
@@ -184,7 +184,7 @@ const MenuIcon = styled.Image`
 
 const HomeBtn = styled.TouchableOpacity`
   width: 8%;
-  height: 40%;
+  height: 70%;
 `;
 
 const HomeIcon = styled.Image`
@@ -193,8 +193,8 @@ const HomeIcon = styled.Image`
 `;
 
 const FavoritesBtn = styled.TouchableOpacity`
-  width: 7%;
-  height: 40%;
+  width: 8%;
+  height: 70%;
 `;
 
 const FavoritesIcon = styled.Image`
@@ -248,8 +248,6 @@ const HeadView = styled.View`
 const CloseModal = styled.TouchableOpacity`
   height: 35px;
   margin: auto auto 0 0;
-  /* border-radius: 5px;
-  background-color: ${(props) => props.theme.secondaryColor}; */
 `;
 
 const CloseText = styled.Text`

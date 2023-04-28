@@ -21,4 +21,4 @@ Fonctionnalitées finales :
   - Reprendre la on ou s'est arrêter dans les chapitres ✔
   - Publicités
   - Notifee ✔
-  - Animations
+  - Animations ✔
