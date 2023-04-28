@@ -1,31 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components/native";
 import Header from "../../components/Header";
 import serverService from "../../services/server.service";
 import { useNavigation } from "@react-navigation/native";
+import I18n from "../../traduction/i18n";
+import { LanguageContext } from "../../traduction/LanguageContext";
+import { useDispatch, useSelector } from "react-redux";
+import { storeMangas, mangasHasError, mangasIsLoading, fetchMangas } from "../../redux/actions/mangas"
 
 const Index = () => {
-  const [mangas, setMangas] = useState([]);
 
   const navigation = useNavigation();
 
+  const { language } = useContext(LanguageContext);
+
+  const mangasList = useSelector((state) => state.mangas.mangasList); 
+  const isLoading = useSelector((state) => state.mangas.isLoading); 
+  const isError = useSelector((state) => state.mangas.error); 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    serverService
-      .getMangas()
-      .then((response) => {
-        setMangas(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    dispatch(fetchMangas());
   }, []);
+
+  while (isLoading) return <ErrorView><ErrorText>Loading ...</ErrorText></ErrorView>;
+
+  if (isError) return <ErrorView><ErrorText>{I18n.t("errorHomePage")}</ErrorText></ErrorView>;
 
   return (
     <Container>
       <ContentContainer>
         <Grid>
-          {mangas &&
-            mangas.map((manga) => (
+          {mangasList &&
+            mangasList.map((manga) => (
               <Card
                 key={manga}
                 onPress={() =>
@@ -85,6 +92,21 @@ const MangaTitle = styled.Text`
   font-weight: 600;
   color: ${(props) => props.theme.text};
   padding: 15px;
+`;
+
+// ERROR AND LOADING
+
+const ErrorView = styled.View`
+  width: 100%;
+  height: 100%;
+  background-color: ${props => props.theme.primaryColor};
+  margin: auto;
+`;
+
+const ErrorText = styled.Text`
+  font-size: 30px;
+  margin: auto;
+  color: ${props => props.theme.text};
 `;
 
 export default Index;

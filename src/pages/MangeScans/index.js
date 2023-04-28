@@ -87,7 +87,7 @@ const Index = (props) => {
 
     await notifee.displayNotification({
       title: "My Scan Reader",
-      body: "Vous êtes à la dernière page !",
+      body: I18n.t("finishChapter"),
       android: {
         channelId: "default",
       },
@@ -258,13 +258,13 @@ const HeadView = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 100px;
-  padding: 10px;
+  height: 60px;
+  padding: 30px 10px 10px 10px;
+  background-color: ${(props) => props.theme.globalPrimaryColor};
 `;
 
 const CloseModal = styled.TouchableOpacity`
   height: 35px;
-  width: 17%;
 `;
 
 const CloseText = styled.Text`
@@ -274,12 +274,11 @@ const CloseText = styled.Text`
 
 const SwitchView = styled.TouchableOpacity`
   height: 35px;
-  width: 40%;
 `;
 
 const SwitchViewText = styled.Text`
   color: #fff;
-  font-size: 15px;
+  font-size: 20px;
   text-align: right;
 `;
 

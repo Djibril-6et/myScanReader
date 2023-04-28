@@ -14,7 +14,7 @@ import ShareIcon from "../../assets/share.png";
 import ShareIconDark from "../../assets/share-dark.png";
 import NotificationIcon from "../../assets/bell.png";
 import NotificationIconDark from "../../assets/bell-dark.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Index = ({ toggleTheme, myTheme }) => {
   const navigation = useNavigation();

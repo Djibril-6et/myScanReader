@@ -8,6 +8,8 @@ const pt = {
   mesFavs: "Meus Favoritos",
   selectLanguage: "Selecionar Linguagem",
   selectTheme: "Selcionar Thema",
+  finishChapter: 'Você está na última página !',
+  errorHomePage: 'Erro de rede.',
 };
 
 export default pt;
