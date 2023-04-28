@@ -15,7 +15,7 @@ Fonctionnalitées prévues pour le 6 Avril :
     
     ![ReadScans](https://user-images.githubusercontent.com/101570711/235261223-359ffee1-3706-4029-88c6-13f1893d50f9.gif)
 
-  - Conserver les favoris avec Redux ✔
+  - Conserver les favoris ( Redux ) ✔
     
     ![Favorites](https://user-images.githubusercontent.com/101570711/235261279-4ada9f52-8b6e-4b80-8a8f-1fdece9fb2e2.gif)
 
@@ -30,7 +30,7 @@ Fonctionnalitées finales :
     
     ![SplashScreen](https://user-images.githubusercontent.com/101570711/235261377-558eb346-892a-4ea2-9f51-f0332a4538e7.gif)
 
-  - Thème sombre/claire ✔
+  - Thème sombre/claire ( Styled-Components ) ✔
     
     ![Themes](https://user-images.githubusercontent.com/101570711/235261414-ef2e9697-a8dd-4caa-8ecc-8dea1fc43ac6.gif)
 
@@ -38,7 +38,7 @@ Fonctionnalitées finales :
     
     ![Share](https://user-images.githubusercontent.com/101570711/235261431-da686d83-bc84-4a04-8cc6-37b575c641a4.gif)
 
-  - Reprendre la on ou s'est arrêter dans les chapitres ✔
+  - Reprendre la on ou s'est arrêter dans les chapitres ( Redux ) ✔
     
     ![KeepProgress](https://user-images.githubusercontent.com/101570711/235261449-547c5a3a-f7bc-4147-9e03-66283f63d573.gif)
 
@@ -50,7 +50,7 @@ Fonctionnalitées finales :
     
     ![LoadingAnim](https://user-images.githubusercontent.com/101570711/235261539-1090d27f-6c0e-459b-a16c-37eed2950ca3.gif)
 
-  - Gestion des erreurs ( par exemple sur le fetch sur le server échoue ) ✔
+  - Gestion des erreurs ( par exemple sur le fetch sur le server échoue ) ( Redux ) ✔
     
     ![ErrorHome](https://user-images.githubusercontent.com/101570711/235261558-8166350e-89b3-4eea-a8c1-64988997ae9a.gif)
 
