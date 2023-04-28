@@ -1,31 +1,50 @@
-import React, { useEffect, useState, useContext } from "react";
-import styled from "styled-components/native";
-import Header from "../../components/Header";
-import serverService from "../../services/server.service";
+import React, { useEffect, useContext } from "react";
+import styled from "styled-components";
 import { useNavigation } from "@react-navigation/native";
 import I18n from "../../traduction/i18n";
 import { LanguageContext } from "../../traduction/LanguageContext";
 import { useDispatch, useSelector } from "react-redux";
-import { storeMangas, mangasHasError, mangasIsLoading, fetchMangas } from "../../redux/actions/mangas"
+import { fetchMangas } from "../../redux/actions/mangas";
+import { Skeleton, Stack } from "@rneui/themed";
+import { View } from "react-native";
 
 const Index = () => {
-
   const navigation = useNavigation();
 
   const { language } = useContext(LanguageContext);
 
-  const mangasList = useSelector((state) => state.mangas.mangasList); 
-  const isLoading = useSelector((state) => state.mangas.isLoading); 
-  const isError = useSelector((state) => state.mangas.error); 
+  const mangasList = useSelector((state) => state.mangas.mangasList);
+  const isLoading = useSelector((state) => state.mangas.isLoading);
+  const isError = useSelector((state) => state.mangas.error);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchMangas());
   }, []);
 
-  while (isLoading) return <ErrorView><ErrorText>Loading ...</ErrorText></ErrorView>;
+  while (isLoading)
+    return (
+      <ErrorView>
+        <LoadingBgColor>
+          <ErrorText>Loading</ErrorText>
+          <ErrorContainer>
+            <SkeletonFlex>
+              <Skeleton circle animation="wave" width={40} height={40} />
+              <Skeleton circle animation="wave" width={40} height={40} />
+              <Skeleton circle animation="wave" width={40} height={40} />
+              <Skeleton circle animation="wave" width={40} height={40} />
+            </SkeletonFlex>
+          </ErrorContainer>
+        </LoadingBgColor>
+      </ErrorView>
+    );
 
-  if (isError) return <ErrorView><ErrorText>{I18n.t("errorHomePage")}</ErrorText></ErrorView>;
+  if (isError)
+    return (
+      <ErrorView>
+        <ErrorText>{I18n.t("errorHomePage")}</ErrorText>
+      </ErrorView>
+    );
 
   return (
     <Container>
@@ -99,14 +118,28 @@ const MangaTitle = styled.Text`
 const ErrorView = styled.View`
   width: 100%;
   height: 100%;
-  background-color: ${props => props.theme.primaryColor};
+  background-color: ${(props) => props.theme.primaryColor};
+`;
+
+const ErrorContainer = styled.View`
+  width: 100%;
+`;
+
+const SkeletonFlex = styled.View`
+  margin: 5px auto auto auto;
+  font-size: 30px;
+  display: flex;
+  flex-direction: row;
+`;
+
+const LoadingBgColor = styled.View`
   margin: auto;
 `;
 
 const ErrorText = styled.Text`
   font-size: 30px;
   margin: auto;
-  color: ${props => props.theme.text};
+  color: ${(props) => props.theme.text};
 `;
 
 export default Index;

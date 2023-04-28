@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components/native";
-import Header from "../../components/Header";
 import serverService from "../../services/server.service";
 const path = require("path");
 import Pdf from "react-native-pdf";

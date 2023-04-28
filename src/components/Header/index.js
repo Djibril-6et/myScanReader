@@ -1,4 +1,4 @@
-import { React, useContext, useState, useEffect } from "react";
+import { React, useContext, useState } from "react";
 import styled from "styled-components";
 import { useNavigation } from "@react-navigation/native";
 import I18n from "../../traduction/i18n";
@@ -20,7 +20,6 @@ const Index = ({ toggleTheme, myTheme }) => {
   const navigation = useNavigation();
   const [currentTheme, setCurrentTheme] = useState(myTheme);
   const [isModal, setIsModal] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState("");
 
   const viewedPageList = useSelector(
     (state) => state.viewedpage.lastViewedPages
