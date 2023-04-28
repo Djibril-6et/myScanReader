@@ -52,7 +52,7 @@ Fonctionnalitées finales :
 
   - Gestion des erreurs ( par exemple sur le fetch sur le server échoue ) ( Redux ) ✔
     
-    ![ErrorHome](https://user-images.githubusercontent.com/101570711/235261558-8166350e-89b3-4eea-a8c1-64988997ae9a.gif)
+    ![ErrorHome](https://user-images.githubusercontent.com/101570711/235262409-6f8f775c-187a-4eaf-a647-c1aaefb71bcd.gif)
 
   - Publicités
   - Loader
